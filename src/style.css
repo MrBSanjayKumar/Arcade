@@ -9,8 +9,8 @@ body {
 }
 
 .bg-image {
-  background: linear-gradient(90deg, rgba(13,110,253,0.12), rgba(25,135,84,0.06)),
-    /* url('https://images.unsplash.com/photo-1606813902877-1e1f9c9b3d7a?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=') 
+  /* background: linear-gradient(90deg, rgba(13,110,253,0.12), rgba(25,135,84,0.06)),
+    url('https://images.unsplash.com/photo-1606813902877-1e1f9c9b3d7a?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=') 
     center/cover no-repeat; */
   background-blend-mode: overlay;
   min-height: 260px;
