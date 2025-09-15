@@ -1,0 +1,51 @@
+:root {
+  --brand: #0d6efd;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #fff;
+  color: #212529;
+}
+
+.bg-image {
+  background: linear-gradient(90deg, rgba(13,110,253,0.12), rgba(25,135,84,0.06)),
+    url('https://images.unsplash.com/photo-1606813902877-1e1f9c9b3d7a?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=') 
+    center/cover no-repeat;
+  background-blend-mode: overlay;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+}
+
+.card-game {
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor: default;
+}
+.card-game:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.price-badge {
+  font-weight: 700;
+  color: #fff;
+  background: var(--brand);
+}
+
+.genre-badge {
+  font-size: .72rem;
+}
+
+.cart-item .thumb {
+  width: 64px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+@media (max-width: 576px) {
+  .bg-image { min-height: 180px }
+  #searchInput { width: 160px }
+}
