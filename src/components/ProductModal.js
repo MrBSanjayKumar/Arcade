@@ -1,8 +1,21 @@
-import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { toast } from "react-toastify"; // import toast
 
 const ProductModal = ({ show, onHide, product, onAdd }) => {
   if (!product) return null;
+
+  const handleAddToCart = () => {
+    onAdd(product); // call the parent function to add item
+    toast.success(`${product.title} added to cart! 🛒`, {
+      position: "bottom-right",
+      autoClose: 2000, // 2 sec
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+    onHide(); // close modal after adding
+  };
 
   return (
     <Modal show={show} onHide={onHide} centered>
@@ -21,9 +34,12 @@ const ProductModal = ({ show, onHide, product, onAdd }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>Close</Button>
-        <Button variant="primary" onClick={() => onAdd(product)}>Add to Cart</Button>
+        <Button variant="primary" onClick={handleAddToCart}>
+          Add to Cart
+        </Button>
       </Modal.Footer>
     </Modal>
   );
 };
+
 export default ProductModal;

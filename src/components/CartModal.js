@@ -6,7 +6,7 @@ const CartModal = ({ show, onHide, cart, onUpdateQty, onRemove, onClear }) => {
 
   const handleRemove = (item) => {
     onRemove(item.id); // call parent remove function
-    toast.error(`${item.title} removed from cart.`, {
+    toast.error(`${item.title} removed from cart. 🛒`, {
       position: "bottom-right",
       autoClose: 2000,
     });

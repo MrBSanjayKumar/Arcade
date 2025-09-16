@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 const ProductCard = ({ product, onAdd, onDetails }) => {
   const handleAdd = () => {
     onAdd(product); // Add to cart logic
-    toast.success(`${product.title} added to cart!`, {
+    toast.success(`${product.title} added to cart! 🛒`, {
       position: "bottom-right",
       autoClose: 2000,
     });
