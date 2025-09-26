@@ -5,6 +5,7 @@ import { FilterBar } from './components/FilterBar.jsx';
 import { GameCard } from './components/GameCard.jsx';
 import { Cart } from './components/Cart.jsx';
 import { games } from './data/games.js';
+import { Toaster, toast } from 'react-hot-toast';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,20 +26,11 @@ function App() {
     });
 
     switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'rating':
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'newest':
-        filtered.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
-        break;
-      default:
-        filtered.sort((a, b) => b.reviews - a.reviews);
+      case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
+      case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
+      case 'rating': filtered.sort((a, b) => b.rating - a.rating); break;
+      case 'newest': filtered.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)); break;
+      default: filtered.sort((a, b) => b.reviews - a.reviews);
     }
 
     return filtered;
@@ -56,20 +48,13 @@ function App() {
       }
       return [...prev, { ...game, quantity: 1 }];
     });
+
+    toast.success(`${game.title} added to cart!`); // ✅ only here
   };
 
   const handleUpdateQuantity = (id, quantity) => {
-    if (quantity === 0) {
-      handleRemoveItem(id);
-      return;
-    }
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id
-          ? { ...item, quantity }
-          : item
-      )
-    );
+    if (quantity === 0) { handleRemoveItem(id); return; }
+    setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity } : item));
   };
 
   const handleRemoveItem = (id) => {
@@ -80,6 +65,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900">
+      <Toaster position="top-right" reverseOrder={false} />
+
       <Header
         cartItems={totalItems}
         searchTerm={searchTerm}
@@ -115,27 +102,10 @@ function App() {
             <GameCard
               key={game.id}
               game={game}
-              onAddToCart={handleAddToCart}
+              onAddToCart={handleAddToCart} // ✅ only here
             />
           ))}
         </div>
-
-        {filteredAndSortedGames.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-gray-400 text-xl mb-4">
-              No games found matching your criteria
-            </div>
-            <button
-              onClick={() => {
-                setSearchTerm('');
-                setSelectedCategory('All');
-              }}
-              className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-200"
-            >
-              Clear Filters
-            </button>
-          </div>
-        )}
       </main>
 
       <Cart
