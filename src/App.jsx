@@ -65,7 +65,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="bottom-right" reverseOrder={false} />
 
       <Header
         cartItems={totalItems}
