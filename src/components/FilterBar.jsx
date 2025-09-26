@@ -1,4 +1,3 @@
-import React from 'react';
 import { Filter, Grid, List } from 'lucide-react';
 
 export const FilterBar = ({
