@@ -1,3 +1,4 @@
+import React from 'react';
 import { Filter, Grid, List } from 'lucide-react';
 
 export const FilterBar = ({
@@ -5,7 +6,7 @@ export const FilterBar = ({
   selectedCategory,
   onCategoryChange,
   sortBy,
-  onSortChange
+  onSortChange,
 }) => {
   return (
     <div className="bg-gray-900/50 backdrop-blur-sm border-y border-gray-800 py-4">
@@ -13,9 +14,9 @@ export const FilterBar = ({
         <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between space-y-4 xs:space-y-0">
           
           {/* Categories */}
-          <div className="flex items-center space-x-4 overflow-x-auto pb-2 xs:pb-0">
-            <Filter className="w-5 h-5 text-gray-400 flex-shrink-0" />
-            <div className="flex space-x-2 min-w-max">
+          <div className="flex items-start xs:items-center space-x-0 xs:space-x-4 overflow-x-auto pb-2 xs:pb-0 flex-wrap gap-2">
+            <Filter className="w-5 h-5 text-gray-400 flex-shrink-0 mb-2 xs:mb-0" />
+            <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
@@ -33,7 +34,7 @@ export const FilterBar = ({
           </div>
 
           {/* Sort and View Options */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-2 xs:space-y-0 xs:space-x-4">
             <select
               value={sortBy}
               onChange={(e) => onSortChange(e.target.value)}
@@ -55,6 +56,7 @@ export const FilterBar = ({
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
