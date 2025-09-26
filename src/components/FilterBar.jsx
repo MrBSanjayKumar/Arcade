@@ -1,13 +1,20 @@
 import React from 'react';
 import { Filter, Grid, List } from 'lucide-react';
 
-export const FilterBar = ({ categories, selectedCategory, onCategoryChange, sortBy, onSortChange }) => {
+export const FilterBar = ({
+  categories,
+  selectedCategory,
+  onCategoryChange,
+  sortBy,
+  onSortChange
+}) => {
   return (
     <div className="bg-gray-900/50 backdrop-blur-sm border-y border-gray-800 py-4">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+        <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between space-y-4 xs:space-y-0">
+          
           {/* Categories */}
-          <div className="flex items-center space-x-4 overflow-x-auto pb-2 lg:pb-0">
+          <div className="flex items-center space-x-4 overflow-x-auto pb-2 xs:pb-0">
             <Filter className="w-5 h-5 text-gray-400 flex-shrink-0" />
             <div className="flex space-x-2 min-w-max">
               {categories.map((category) => (
