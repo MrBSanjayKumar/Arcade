@@ -6,6 +6,8 @@ import { GameCard } from './components/GameCard.jsx';
 import { Cart } from './components/Cart.jsx';
 import { games } from './data/games.js';
 import { Toaster, toast } from 'react-hot-toast';
+import Footer from './components/Footer.jsx';
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -115,6 +117,9 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
       />
+
+      <Footer />
+
     </div>
   );
 }
