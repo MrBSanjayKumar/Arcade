@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Header } from './components/Header.jsx';
 import { Hero } from './components/Hero.jsx';
 import { FilterBar } from './components/FilterBar.jsx';
@@ -8,12 +8,22 @@ import { games } from './data/games.js';
 import { Toaster, toast } from 'react-hot-toast';
 import Footer from './components/Footer.jsx';
 
-
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('popular');
-  const [cartItems, setCartItems] = useState([]);
+
+  // ✅ Initialize cart from localStorage
+  const [cartItems, setCartItems] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // ✅ Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const categories = ['All', ...Array.from(new Set(games.map(game => game.category)))];
@@ -51,7 +61,7 @@ function App() {
       return [...prev, { ...game, quantity: 1 }];
     });
 
-    toast.success(`${game.title} added to cart!`); // ✅ only here
+    toast.success(`${game.title} added to cart!`);
   };
 
   const handleUpdateQuantity = (id, quantity) => {
@@ -104,7 +114,7 @@ function App() {
             <GameCard
               key={game.id}
               game={game}
-              onAddToCart={handleAddToCart} // ✅ only here
+              onAddToCart={handleAddToCart}
             />
           ))}
         </div>
@@ -119,7 +129,6 @@ function App() {
       />
 
       <Footer />
-
     </div>
   );
 }
